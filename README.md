@@ -1,14 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version
 ruby 3.4.9 (2026-03-11 revision 76cca827ab) +PRISM [x86_64-linux]
 
-* System dependencies
+* Pré requisitos:
 -Ruby
 -Ruby on Rails
 -PostgreSQL
@@ -16,23 +11,24 @@ ruby 3.4.9 (2026-03-11 revision 76cca827ab) +PRISM [x86_64-linux]
 -Git
 -Docker
 
-* Configuration
--Clone the repository:
--git clone https://github.com/Diolovedio/rails_setup_project.git
+Dica: Não é necessário ter Ruby, Rails ou PostgreSQL instalados localmente. Tudo roda dentro dos containers Docker.
 
--Enter the project directory:
-cd rails_setup_project
+* Instalando o Docker
+Acesse o site oficial: https://docs.docker.com/get-docker/
+Escolha o instalador para seu sistema operacional (Linux, macOS ou Windows).
+Siga as instruções de instalação e verifique com:
 
--Install project dependencies:
-bundle install
+docker --version
+docker compose version
 
-* Database creation
 
-* Database initialization
+* Clonando e acessando o repositório:
+- git clone https://github.com/Diolovedio/rails_setup_project.git
+- Cd rails_setup_project
+ 
+* instale as dependências:
+- bundle install
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+*Subindo o Projeto*
+- docker compose up

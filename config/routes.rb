@@ -1,22 +1,22 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 
 # Autenticação básica só em produção (em dev, pode testar sem senha)
 if Rails.env.production?
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-    username == ENV['SIDEKIQ_WEB_USERNAME'] &&
-    password == ENV['SIDEKIQ_WEB_PASSWORD']
+    username == ENV["SIDEKIQ_WEB_USERNAME"] &&
+    password == ENV["SIDEKIQ_WEB_PASSWORD"]
   end
 end
 
 Rails.application.routes.draw do
-   # Outras rotas do seu projeto aqui
+  # Outras rotas do seu projeto aqui
   # ex:
   # root "home#index"
   # resources :users
 
 
   # Monta a interface web do Sidekiq
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => "/sidekiq"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -67,3 +67,5 @@ docker compose up
 |-----------------|----------------------------------|
 | Aplicação Rails | https://localhost/               |
 | Sidekiq Web UI  | https://localhost/sidekiq        |
+
+> Requisições HTTP (`http://localhost`) são redirecionadas automaticamente para HTTPS (`https://localhost`) com status 301.

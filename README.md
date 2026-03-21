@@ -24,8 +24,8 @@ docker compose version
 
 * Clonando e acessando o repositório:
 - git clone https://github.com/Diolovedio/rails_setup_project.git
-- Cd rails_setup_project
-
+- cd rails_setup_project
+- code . (abre no vs code)
 
 *Configurando as Variáveis de Ambiente
 
@@ -33,7 +33,6 @@ O projeto usa um arquivo `.env` para variáveis sensíveis. Esse arquivo **não 
 
 ```bash
 touch .env
-touch .env.example
 ```
 Abra o .env no seu editor e preencha os valores:
 - RAILS_ENV=development

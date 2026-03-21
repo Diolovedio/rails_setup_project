@@ -1,7 +1,8 @@
-http://localhost {
-  redir https://localhost{uri} permanent
-}
-
 localhost {
+  @http {
+    protocol http
+  }
+  redir @http https://localhost{uri} permanent
+
   reverse_proxy web:3000
 }

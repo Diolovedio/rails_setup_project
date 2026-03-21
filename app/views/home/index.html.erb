@@ -1,0 +1,116 @@
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #0f1117;
+    color: #e2e8f0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #1e2330;
+    border: 1px solid #2d3748;
+    color: #63b3ed;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #63b3ed, #9f7aea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #718096;
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stack {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .tag {
+    background: #1a1f2e;
+    border: 1px solid #2d3748;
+    color: #a0aec0;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover { opacity: 0.8; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #4299e1, #805ad5);
+    color: #fff;
+  }
+
+  .btn-secondary {
+    background: #1a1f2e;
+    border: 1px solid #2d3748;
+    color: #a0aec0;
+  }
+</style>
+
+<div class="container">
+  <div class="badge">v1.0 · Development</div>
+
+  <h1>Rails Setup Project</h1>
+  <p>Ambiente dockerizado com Rails, PostgreSQL, Redis e Sidekiq.</p>
+
+  <div class="stack">
+    <span class="tag">Ruby 3.4</span>
+    <span class="tag">Rails 8.1</span>
+    <span class="tag">PostgreSQL 15</span>
+    <span class="tag">Redis 7</span>
+    <span class="tag">Sidekiq 8</span>
+    <span class="tag">Docker</span>
+  </div>
+
+  <div class="links">
+    <a href="/sidekiq" class="btn btn-primary">Sidekiq Dashboard</a>
+    <a href="/up" class="btn btn-secondary">Health Check</a>
+  </div>
+</div>

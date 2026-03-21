@@ -53,19 +53,17 @@ docker compose build
 
 > Necessário apenas na primeira vez ou quando o `Dockerfile` mudar.
 
-### Passo 2 — Criar e configurar o banco de dados
+### Passo 2 — Subir todos os serviços
 
 ```bash
-# Criar o banco de dados
-docker compose run --rm web rails db:create
-
-# Rodar as migrations
-docker compose run --rm web rails db:migrate
-```
-
-### Passo 3 — Subir todos os serviços
-
-```bash
-# Em foreground (ver logs em tempo real)
 docker compose up
 ```
+
+> O banco de dados é criado e as migrations são executadas automaticamente via `db:prepare` ao subir o container.
+
+### Acessando a aplicação
+
+| Serviço         | URL                              |
+|-----------------|----------------------------------|
+| Aplicação Rails | https://localhost/               |
+| Sidekiq Web UI  | https://localhost/sidekiq        |

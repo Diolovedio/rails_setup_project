@@ -1,4 +1,15 @@
 services:
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+    depends_on:
+      - web
+
   web:
     build:
       context: .
@@ -7,11 +18,11 @@ services:
     volumes:
       - .:/app
       - bundle_cache:/usr/local/bundle
-    ports:
-      - "3000:3000"
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     env_file: .env
 
   sidekiq:
@@ -23,8 +34,10 @@ services:
       - .:/app
       - bundle_cache:/usr/local/bundle
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     env_file: .env
 
   db:
@@ -36,10 +49,21 @@ services:
       POSTGRES_DB: rails_setup_project_development
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:7
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
   bundle_cache:
+  caddy_data:

@@ -35,11 +35,11 @@ O projeto usa um arquivo `.env` para variáveis sensíveis. Esse arquivo **não 
 cp .env.example .env
 ```
 Abra o .env no seu editor e preencha os valores:
-RAILS_ENV=development
-DB_USERNAME=postgres
-DB_PASSWORD=password
-DB_HOST=db
-REDIS_URL=redis://redis:6379/0
+- RAILS_ENV=development
+- DB_USERNAME=postgres
+- DB_PASSWORD=password
+- DB_HOST=db
+- REDIS_URL=redis://redis:6379/0
 
 
 

@@ -32,7 +32,8 @@ docker compose version
 O projeto usa um arquivo `.env` para variáveis sensíveis. Esse arquivo **não é versionado** (está no `.gitignore`). Crie-o a partir do exemplo:
 
 ```bash
-cp .env.example .env
+touch .env
+touch .env.example
 ```
 Abra o .env no seu editor e preencha os valores:
 - RAILS_ENV=development

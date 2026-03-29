@@ -9,10 +9,7 @@ if Rails.env.production?
 end
 
 Rails.application.routes.draw do
-  # Outras rotas do seu projeto aqui
-  # ex:
-  # root "home#index"
-  # resources :users
+  resources :products
 
 
   # Monta a interface web do Sidekiq

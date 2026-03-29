@@ -8,3 +8,50 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+a {
+  color: #7eb8f7;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #444;
+  padding: 8px 12px;
+  color: #ffffff;
+}
+
+th {
+  background-color: #1a1a1a;
+}
+
+tr:nth-child(even) {
+  background-color: #111111;
+}
+
+tr:nth-child(odd) {
+  background-color: #000000;
+}
+
+input[type="text"], input[type="number"], textarea, select {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: 1px solid #444;
+  padding: 4px 8px;
+}
+
+input[type="submit"], button {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: 1px solid #555;
+  padding: 4px 10px;
+  cursor: pointer;
+}

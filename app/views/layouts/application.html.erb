@@ -24,6 +24,11 @@
   </head>
 
   <body>
+    <% flash.each do |type, message| %>
+      <p style="padding: 10px; margin: 10px; background: <%= type.to_s == 'notice' ? '#d4edda' : '#f8d7da' %>;">
+        <%= message %>
+      </p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

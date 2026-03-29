@@ -1,2 +1,56 @@
 pt-BR:
   hello: "Olá mundo"
+
+  activerecord:
+    models:
+      product:
+        one: Produto
+        other: Produtos
+    attributes:
+      product:
+        name: Nome
+        description: Descrição
+        sku: SKU
+        minimum_stock: Estoque mínimo
+    errors:
+      models:
+        product:
+          attributes:
+            name:
+              blank: não pode ficar em branco
+              too_short: deve ter no mínimo %{count} caracteres
+            sku:
+              blank: não pode ficar em branco
+              taken: já está em uso
+              invalid_sku: deve conter apenas letras e números
+            minimum_stock:
+              blank: não pode ficar em branco
+              not_a_number: deve ser um número
+              not_an_integer: deve ser um número inteiro
+              greater_than_or_equal_to: deve ser maior ou igual a %{count}
+
+  products:
+    index:
+      title: Produtos
+      actions: Ações
+    new:
+      title: Novo produto
+    edit:
+      title: Editar produto
+    actions:
+      new: Novo produto
+      show: Ver
+      edit: Editar
+      destroy: Excluir
+    filter:
+      by_name: Buscar por nome
+      search: Buscar
+    confirm_destroy: Tem certeza que deseja excluir este produto?
+    errors:
+      header:
+        one: "1 erro impediu o salvamento deste produto:"
+        other: "%{count} erros impediram o salvamento deste produto:"
+    notices:
+      created: Produto criado com sucesso.
+      updated: Produto atualizado com sucesso.
+      destroyed: Produto excluído com sucesso.

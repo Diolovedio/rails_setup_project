@@ -1,0 +1,52 @@
+<% content_for :title, t("products.index.title") %>
+
+<h1><%= t("products.index.title") %></h1>
+
+<%= link_to t("products.actions.new"), new_product_path %>
+
+<hr>
+
+<%= form_with url: products_path, method: :get do |f| %>
+  <%= f.label :name, t("products.filter.by_name") %>
+  <%= f.text_field :name, value: @filter_params[:name] %>
+  <%= f.hidden_field :sort, value: @filter_params[:sort] %>
+  <%= f.hidden_field :direction, value: @filter_params[:direction] %>
+  <%= f.submit t("products.filter.search") %>
+<% end %>
+
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        <%= link_to "ID", products_path(sort: "id", direction: next_direction("id", @filter_params), name: @filter_params[:name]) %>
+      </th>
+      <th>
+        <%= link_to t("activerecord.attributes.product.name"), products_path(sort: "name", direction: next_direction("name", @filter_params), name: @filter_params[:name]) %>
+      </th>
+      <th>
+        <%= link_to t("activerecord.attributes.product.sku"), products_path(sort: "sku", direction: next_direction("sku", @filter_params), name: @filter_params[:name]) %>
+      </th>
+      <th><%= t("activerecord.attributes.product.minimum_stock") %></th>
+      <th><%= t("products.index.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= product.sku %></td>
+        <td><%= product.minimum_stock %></td>
+        <td>
+          <%= link_to t("products.actions.show"), product %>
+          <%= link_to t("products.actions.edit"), edit_product_path(product) %>
+          <%= button_to t("products.actions.destroy"), product,
+              method: :delete,
+              form: { data: { turbo_confirm: t("products.confirm_destroy") } } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

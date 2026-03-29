@@ -1,0 +1,36 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red; margin-bottom: 10px;">
+      <h4><%= t("products.errors.header", count: product.errors.count) %></h4>
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, t("activerecord.attributes.product.name") %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, t("activerecord.attributes.product.description") %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :sku, t("activerecord.attributes.product.sku") %>
+    <%= form.text_field :sku %>
+  </div>
+
+  <div>
+    <%= form.label :minimum_stock, t("activerecord.attributes.product.minimum_stock") %>
+    <%= form.number_field :minimum_stock, min: 0 %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

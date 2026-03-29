@@ -1,0 +1,11 @@
+<% content_for :title, @product.name %>
+
+<h1><%= @product.name %></h1>
+
+<p><strong><%= t("activerecord.attributes.product.sku") %>:</strong> <%= @product.sku %></p>
+<p><strong><%= t("activerecord.attributes.product.description") %>:</strong> <%= @product.description.presence || "-" %></p>
+<p><strong><%= t("activerecord.attributes.product.minimum_stock") %>:</strong> <%= @product.minimum_stock %></p>
+
+<%= link_to t("products.actions.edit"), edit_product_path(@product) %>
+|
+<%= link_to t("products.index.title"), products_path %>

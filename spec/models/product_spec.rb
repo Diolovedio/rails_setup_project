@@ -12,6 +12,11 @@ RSpec.describe Product, type: :model do
       it "é inválido sem nome" do
         product.name = nil
         expect(product).not_to be_valid
+      end
+
+      it "adiciona erro no campo name quando ausente" do
+        product.name = nil
+        product.valid?
         expect(product.errors[:name]).to be_present
       end
 
@@ -46,6 +51,12 @@ RSpec.describe Product, type: :model do
         create(:product, sku: "DUPLICADO")
         duplicate = build(:product, sku: "DUPLICADO")
         expect(duplicate).not_to be_valid
+      end
+
+      it "adiciona erro no campo sku quando duplicado" do
+        create(:product, sku: "DUPLICADO")
+        duplicate = build(:product, sku: "DUPLICADO")
+        duplicate.valid?
         expect(duplicate.errors[:sku]).to be_present
       end
     end
@@ -75,13 +86,21 @@ RSpec.describe Product, type: :model do
 
   describe "scopes" do
     describe ".by_name" do
-      it "filtra produtos pelo nome (case insensitive)" do
-        create(:product, name: "Caneta Azul")
-        create(:product, name: "Lápis Preto")
+      it "retorna produtos que correspondem ao nome" do
+        create(:product, name: "Caneta Azul", sku: "CAN001")
+        create(:product, name: "Lápis Preto", sku: "LAP001")
+        expect(Product.by_name("caneta").map(&:name)).to include("Caneta Azul")
+      end
 
-        results = Product.by_name("caneta")
-        expect(results.map(&:name)).to include("Caneta Azul")
-        expect(results.map(&:name)).not_to include("Lápis Preto")
+      it "não retorna produtos que não correspondem ao nome" do
+        create(:product, name: "Caneta Azul", sku: "CAN001")
+        create(:product, name: "Lápis Preto", sku: "LAP001")
+        expect(Product.by_name("caneta").map(&:name)).not_to include("Lápis Preto")
+      end
+
+      it "ignora acentos na busca" do
+        create(:product, name: "Lápis Preto HB", sku: "LAP001")
+        expect(Product.by_name("Lapis").map(&:name)).to include("Lápis Preto HB")
       end
     end
 
@@ -89,22 +108,17 @@ RSpec.describe Product, type: :model do
       it "ordena por nome ascendente" do
         create(:product, name: "Zebra", sku: "ZBR001")
         create(:product, name: "Abelha", sku: "ABL001")
-
-        results = Product.ordered_by("name", "asc")
-        expect(results.first.name).to eq("Abelha")
+        expect(Product.ordered_by("name", "asc").first.name).to eq("Abelha")
       end
 
       it "ordena por nome descendente" do
         create(:product, name: "Zebra", sku: "ZBR001")
         create(:product, name: "Abelha", sku: "ABL001")
-
-        results = Product.ordered_by("name", "desc")
-        expect(results.first.name).to eq("Zebra")
+        expect(Product.ordered_by("name", "desc").first.name).to eq("Zebra")
       end
 
-      it "usa 'id' como campo padrão para campos inválidos" do
-        results = Product.ordered_by("campo_invalido", "asc")
-        expect { results.to_a }.not_to raise_error
+      it "não levanta erro para campos inválidos" do
+        expect { Product.ordered_by("campo_invalido", "asc").to_a }.not_to raise_error
       end
     end
   end

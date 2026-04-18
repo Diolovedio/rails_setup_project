@@ -8,13 +8,14 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
     depends_on:
-      - web
+      web:
+        condition: service_healthy
 
   web:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: bash -c "bin/rails db:prepare && bin/rails server -b 0.0.0.0"
+    command: bash -c "bundle check || bundle install && bin/rails db:prepare && bin/rails server -b 0.0.0.0"
     volumes:
       - .:/app
       - bundle_cache:/usr/local/bundle
@@ -24,12 +25,18 @@ services:
       redis:
         condition: service_healthy
     env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/up || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
   sidekiq:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: bundle exec sidekiq
+    command: bash -c "bundle check || bundle install && bundle exec sidekiq"
     volumes:
       - .:/app
       - bundle_cache:/usr/local/bundle
